@@ -1,0 +1,19 @@
+.nav-wrapper {
+    width: 100vw;
+  }
+@media only screen and (min-width : 768px) {
+  .nav-wrapper {
+    width: 8rem;
+    height: 100vh;
+  }
+  .nav-wrapper .nav {
+    flex: 1;
+  }
+  .logo {
+    position: absolute;
+    top: 10px;
+    font: Bold;
+    font-size: 4.5em;
+    writing-mode: vertical-rl;
+  }
+}

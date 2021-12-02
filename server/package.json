@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon -L ./bin/www"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-jwt": "^6.1.0",
+    "express-jwt-authz": "^2.4.1",
+    "jwks-rsa": "^2.0.5",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
