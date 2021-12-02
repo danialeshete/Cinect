@@ -1,0 +1,53 @@
+version: "3"
+services:
+
+  client:
+    build: ./client
+    ports:
+      - 3000:3000
+    networks:
+      - mern-network
+    volumes:
+      - ./client/src:/usr/app/src
+      - ./client/public:/usr/app/public
+    depends_on:
+      - server
+    environment:
+      - REACT_APP_SERVER=http://localhost:5000
+      - CHOKIDAR_USEPOLLING=true
+  
+  server:
+    build: ./server
+    ports:
+      - 5000:5000
+    networks:
+      - mern-network
+    volumes:
+      - ./server:/usr/app/src
+    depends_on:
+      - db
+    environment:
+      - PORT=5000
+      - MONGO_URL=mongodb://db:27017
+      - CLIENT=http://localhost:3000
+
+  db:
+    image: mongo:5
+    ports:
+      - 27017:27017
+    networks:
+      - mern-network
+    volumes:
+      - mongo-data:/data/db
+      - mongo-data:/data/configdb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: ws21
+
+networks:
+  mern-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
