@@ -32,7 +32,7 @@ services:
       - CLIENT=http://localhost:3000
 
   db:
-    image: mongo:5
+    build: ./database
     ports:
       - 27017:27017
     networks:

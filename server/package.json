@@ -13,6 +13,7 @@
     "express-jwt": "^6.1.0",
     "express-jwt-authz": "^2.4.1",
     "jwks-rsa": "^2.0.5",
+    "mongoose": "^6.0.14",
     "morgan": "~1.9.1"
   },
   "devDependencies": {
