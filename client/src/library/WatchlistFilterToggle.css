@@ -1,0 +1,18 @@
+.wrapper-button {
+  display: flex;
+  padding: 0;
+  background: none;
+  border: none;
+  color: inherit;
+}
+
+.watchlist-filter {
+  font-size: 1.5em;
+  width: calc(1.5em + 24px);
+  height: calc(1.5em + 12px);
+  border-radius: 5px;
+}
+
+.watchlist-filter:hover {
+  background-color: #222;
+}

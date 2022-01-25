@@ -1,19 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap');
+@font-face {
+  font-family: "Font Awesome 6 Free Solid";
+  src: url(./fonts/fa-solid-900.ttf);
+}
+html {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(26, 26, 26);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+}
+
 .app {
   display: flex;
   flex-direction: column-reverse;
   justify-content: space-between;
   height: 100vh;
 }
-.app-header {
+
+.app-header.bg-dark {
   display: flex;
   flex: 1;
   overflow: auto;
+  justify-content: center;
+  background-color: rgb(26, 26, 26) !important;
 }
+
 .content {
   display: flex;
 }
+
+.content-card {
+  background-color: #222;
+  padding: 20px;
+  border-radius: 20px;
+}
+
 @media only screen and (min-width : 768px) {
   .app {
     flex-direction: row;
   }
+}
+
+a {
+  text-decoration: none;
+  color: lightblue;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 3px 10px rgb(0 0 0 / 40%);
+}
+
+.btn {
+  border-radius: 8px;
+}
+
+.btn-secondary, .btn-secondary:active, .btn-secondary:focus, .btn-secondary:active:focus {
+  background-color: #1a1a1a;
+  border-color: #1a1a1a;
+
+  box-shadow: none;
+}
+
+.btn-light {
+  background-color: #DDD;
+  border-color: #DDD;
+}
+
+.btn-light:hover {
+  background-color: #FFF;
+  border-color: #FFF;
+}
+
+.btn-secondary:hover {
+  background-color: #292929;
+  border-color: #292929;
+  box-shadow: none;
+}
+
+.btn-primary, .btn-primary:active, .btn-primary:focus, .btn-primary:active:focus {
+  background-color: #383838;
+  border-color: #383838;
+  box-shadow: none;
+}
+
+.btn-primary:hover {
+  background-color: #292929;
+  border-color: #292929;
+  box-shadow: none;
+}
+
+.btn-primary:disabled {
+  background-color: #9c9c9c;
+  border-color: #9c9c9c;
+  box-shadow: none;
+}
+
+.btn-danger {
+  background-color: #ec4848;
+  border-color: #ec4848;
+}
+
+.yellow.btn.btn-outline-primary {
+  background-color: transparent;
+  border-color: #ffdd00;
+  color: #ffdd00;
+  box-shadow: none !important;
+}
+
+.btn-check:checked+.yellow.btn-outline-primary {
+  background-color: #ffdd00 !important;
+  border-color: #ffdd00 !important;
+  color: black;
+  box-shadow: none !important;
+}
+
+.yellow.btn.btn-outline-primary:hover {
+  background-color: #ffdd00 !important;
+  border-color: #ffdd00 !important;
+  color: black;
+  box-shadow: none !important;
+}
+
+.user-card a {
+  color: white;
+  font-weight: 600;
+}
+
+.profile-picture img {
+  border-radius: 100%;
+}
+
+.sm-col-gap {
+  column-gap: 1em;
+}
+
+.xs-col-gap {
+  column-gap: 0.5em;
+}
+
+.xxs-col-gap {
+  column-gap: 0.3em;
+}
+
+.height-1-2-em {
+  height: 1.2em;
+}
+
+.profile-picture-wrapper img {
+  position: absolute;
+  /* Take your picture out of the flow */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* Make the picture taking the size of it's parent */
+  width: 100%;
+  /* This if for the object-fit */
+  height: 100%;
+  /* This if for the object-fit */
+  object-fit: cover;
+  /* Equivalent of the background-size: cover; of a background-image */
+  object-position: center;
+  z-index: -1;
+  border-radius: 100%;
+}
+
+.profile-picture-wrapper.sm {
+  width: 35px;
+}
+
+.profile-picture-wrapper {
+  position: relative;
+  width: 100%;
+  /* The size you want */
+  z-index: 1;
+}
+
+.profile-picture-wrapper::before {
+  content: "";
+  display: block;
+  padding-bottom: 100%; 
+}
+
+.profile-picture-wrapper.upload-image::before {
+  font-family: "Font Awesome 6 Free Solid";
+  font-size: min(5vw, 3em);
+  content: "\f030";
+  display: block;
+  line-height: 1em;
+  padding-bottom: calc(50% - 0.5em);
+  height: 100%;
+  padding-top: calc(50% - 0.5em);
+  text-align: center;
+  /* The padding depends on the width, not on the height, so with a padding-bottom of 100% you will get a square */
+  z-index: 2;
+  border-radius: 100%;
+  color: transparent;
+}
+.profile-picture-wrapper.upload-image{
+
+}
+.profile-picture-wrapper.upload-image:hover:before {
+  background-color: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  color: white;
+}
+
+.font-size-md {
+  font-size: 1.5em;
+}
+
+.dark .modal-content {
+  background-color: #222;
+}
+
+.dark .btn-close {
+  color: white;
+}
+
+.modal-content {
+  border-radius: 20px;
+}
+
+.modal-content>div {
+  border: none;
+}
+
+.round-text-dependent {
+  border-radius: calc(1em + 6px);
+  padding: 0.5em 1em;
+}
+
+textarea.round-text-dependent {
+  border-radius: calc(1em);
+  padding: 0.5em 1em;
+}
+
+.avg-rating-icon {
+  font-size: 0.8em;
+}
+
+.avg-rating-text {
+  font-family: 'Roboto Mono', monospace;
+    font-size: 0.8em;
+    line-height: 1.5rem;
 }

@@ -1,0 +1,30 @@
+.content {
+  flex: 1 1;
+  flex-direction: column;
+}
+
+.upload-image {
+  cursor: pointer;
+}
+
+.picture-file-name {
+  margin-left: calc(-1em - 6px);
+  padding-left:  calc(1em + 6px + 6px);
+  width: 20ch;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.picture-file-label {
+  background-color: #383838!important;
+  color: white!important;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.picture-upload-wrapper {
+  cursor: pointer;
+}

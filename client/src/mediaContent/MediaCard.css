@@ -1,0 +1,23 @@
+.media-card .poster {
+  width: calc(100% + 40px);
+  height: 250px;
+  background-position: center;
+}
+
+.x-to-plus {
+  transform: rotate(45deg);
+}
+
+.single-line-title {
+  text-overflow: ellipsis;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  color: white!important;
+  height: 1.5em;
+}
+
+.library-buttons>svg:hover {
+  color:#ffdd00;
+  cursor: pointer;
+}

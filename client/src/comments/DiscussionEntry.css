@@ -1,0 +1,33 @@
+.profile-picture {
+  max-width: 40px;
+  margin-right: 12px;
+}
+h3 {
+  font-size: 1.3em;
+  margin-bottom: 0;
+  color: white;
+}
+.column-gap-20 {
+  column-gap: 10px;
+}
+
+.review-marker {
+  border-radius: 5px;
+  background-color: #ffdd00;
+  color: black;
+  padding: 0px 8px 0px 8px;
+}
+
+.discussion-entry-image {
+  width: 45px;
+}
+
+.timestamp {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.8em;
+}
+
+.delete-button {
+  font-size: 0.8em;
+  padding: 4px 6px;
+}

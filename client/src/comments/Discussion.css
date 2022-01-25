@@ -1,0 +1,73 @@
+.show-hide-button {
+  border-radius: calc(1em + 6px) 0 0 calc(1em + 6px);
+}
+
+.reply-controls textarea {
+  height: 1em;
+  transition: 0.2s;
+}
+
+.reply-controls textarea:focus {
+  height: 4em;
+  transition: 0.2s;
+}
+
+@keyframes expand-animation {
+  from {
+    max-height: 0px;
+  }
+
+  to {
+    max-height: 100%;
+  }
+}
+
+@keyframes collapse-animation {
+  from {
+    max-height: 100%;
+  }
+
+  to {
+    max-height: 0px;
+  }
+}
+
+.animate-expansion {
+  overflow: hidden;
+  visibility: hidden;
+  display: block;
+  max-height: 0px;
+  transition: max-height 150ms ease, visibility 150ms;
+}
+
+.animate-expansion::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+
+.animate-expansion::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: #444;
+}
+
+.animate-expansion.show {
+  visibility: visible;
+  overflow-y: scroll;
+  max-height: calc(200px);
+}
+
+.reply-input::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: inherit;
+}
+
+.reply-input::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: grey;
+}
+
+.discussion-wrapper p {
+  white-space: pre-wrap;
+}

@@ -1,0 +1,15 @@
+.media-detail-body table td, .media-detail-body table th { 
+    padding: 20px 5px 20px 5px;
+}
+.media-detail-body tr {
+    border-top: 4px solid #444;
+    border-bottom: none;
+}
+.media-detail-body tr:first-child {
+    border: none
+}
+.media-detail-body tr td {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}

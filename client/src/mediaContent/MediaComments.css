@@ -1,0 +1,21 @@
+.discussion-wrapper {
+    padding: 20px;
+    border-radius: 20px;
+    background-color: rgb(26, 26, 26);
+    margin-bottom: 10px;
+}
+.discussion-wrapper:last-child {
+
+}
+
+.discussion-wrapper.expanded > .main-comment::after {
+    content: "";
+    width: calc(100% - 64px);
+    height: 6px;
+    margin: 0px 32px 0px 32px;
+    background-color: #222;
+    border-radius: 3px;
+}
+.discussion-wrapper.expanded > .main-comment {
+    margin-bottom: 24px;
+}

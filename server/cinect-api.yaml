@@ -1,0 +1,602 @@
+openapi: 3.0.0
+info:
+  title: Cinect API
+  version: '1.0'
+  description: REST API for frontend application.
+servers:
+  - url: 'http://localhost:5000'
+    description: Development Server
+components:
+  securitySchemes:
+    auth0:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      description: ''
+      type: object
+      x-examples:
+        example-1:
+          username: lisa
+          user_description: i have been to australia!
+          friends:
+            - username: elsa123
+              user_description: Spiderman is not Batman!
+            - username: samsmovies
+              user_description: i like movies
+          library:
+            - movie: 422742
+              personal_rating: 8
+              watched: true
+              tags: []
+            - movie: 508965
+              personal_rating: 7
+              watched: true
+              tags: []
+      properties:
+        username:
+          type: string
+          minLength: 1
+        user_description:
+          type: string
+          minLength: 1
+        friends:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        library:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryEntry'
+      required:
+        - username
+        - user_description
+    LibraryEntry:
+      description: ''
+      type: object
+      x-examples:
+        example-1:
+          media_id: 422742
+          is_tv: false
+          personal_rating: 5
+          watched: true
+          tags:
+            - favourite
+            - comedy
+      properties:
+        media_id:
+          type: integer
+          minimum: 0
+          description: media_id in TMDB
+        is_tv:
+          type: boolean
+          default: false
+          description: Whether media_id is movie_id or tv_id in TMDB
+        personal_rating:
+          type: integer
+          default: 0
+          minimum: 0
+          maximum: 5
+        watched:
+          type: boolean
+          default: false
+        tags:
+          type: array
+          items:
+            type: string
+    LibraryEntryPut:
+      description: ''
+      type: object
+      x-examples:
+        example-1:
+          personal_rating: 5
+          watched: true
+          tags:
+            - favourite
+            - comedy
+        example-2: {}
+      properties:
+        personal_rating:
+          type: integer
+          default: 0
+          minimum: 0
+          maximum: 5
+        watched:
+          type: boolean
+          default: false
+        tags:
+          type: array
+          items:
+            type: string
+    DiscussionElement:
+      title: DiscussionElement
+      type: object
+      x-examples:
+        example-1:
+          content: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr'
+      properties:
+        content:
+          type: string
+    Comment:
+      description: ''
+      type: object
+      x-examples:
+        example-1:
+          _id: 61e1d3faf5bb371f42c19d94
+          owner:
+            _id: auth0|61b7595075059500718f79d1
+            username: elsa123
+          personal_rating: 0
+          referred_media: 121
+          is_tv: false
+          content: 'Magna aliquyam erat, sed diam voluptua'
+          is_review: false
+          replies:
+            - _id: 61de0b5a5de04c31f206734c
+              owner:
+                _id: auth0|619f8058889de0006a0219aa
+                username: Verena
+              personal_rating: 0
+              content: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr'
+            - _id: 61de0b5a5de04c31f2067352
+              owner:
+                _id: google-oauth2|101511080219519963299
+                username: Laurent
+              personal_rating: 0
+              content: At vero eos et accusam et justo duo dolores et ea rebum.
+      properties:
+        _id:
+          type: string
+          minLength: 1
+        owner:
+          type: object
+          required:
+            - _id
+            - username
+          properties:
+            _id:
+              type: string
+              minLength: 1
+            username:
+              type: string
+              minLength: 1
+        personal_rating:
+          type: integer
+        referred_media:
+          type: integer
+        is_tv:
+          type: boolean
+        content:
+          type: string
+          minLength: 1
+        is_review:
+          type: boolean
+        replies:
+          $ref: '#/components/schemas/Reply'
+        created:
+          type: string
+          format: date
+      required:
+        - _id
+        - owner
+        - personal_rating
+        - referred_media
+        - is_tv
+        - content
+        - is_review
+    Reply:
+      description: ''
+      type: object
+      x-examples:
+        example-1:
+          _id: 61de0b5a5de04c31f206734c
+          owner:
+            _id: auth0|619f8058889de0006a0219aa
+            username: Verena
+          personal_rating: 0
+          content: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr'
+      properties:
+        _id:
+          type: string
+          minLength: 1
+        owner:
+          type: object
+          required:
+            - _id
+            - username
+          properties:
+            _id:
+              type: string
+              minLength: 1
+            username:
+              type: string
+              minLength: 1
+        personal_rating:
+          type: integer
+        content:
+          type: string
+          minLength: 1
+        created:
+          type: string
+          format: date
+      required:
+        - _id
+        - owner
+        - personal_rating
+        - content
+  parameters:
+    username:
+      name: username
+      in: path
+      required: true
+      schema:
+        type: string
+        example: lisa
+      description: Username of the user. If the value is `me` the user is specified via JWT (`sub`).
+    tmdb-id:
+      name: tmdb-id
+      in: path
+      required: true
+      schema:
+        type: integer
+        minimum: 0
+        example: 38050
+      description: 'media_id according to TMDB (tv_id, movie_id)'
+    tmdb-type-tv:
+      name: is_tv
+      in: query
+      required: false
+      schema:
+        type: boolean
+        default: 'false'
+      description: Specify type of media id according to TMDB.
+    comment-id:
+      name: comment_id
+      in: query
+      required: true
+      schema:
+        type: string
+      description: ObjectID of comment
+    reply-id:
+      name: reply_id
+      in: query
+      required: true
+      schema:
+        type: string
+      description: ObjectID of reply
+  responses:
+    ObjectCreated:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            x-examples:
+              example-1:
+                object_id: 61e1d47b59b7c658fe3645e9
+            properties:
+              object_id:
+                type: string
+                minLength: 1
+                format: uuid
+            required:
+              - object_id
+          examples:
+            example-1:
+              value:
+                object_id: 61e1d47b59b7c658fe3645e9
+  requestBodies: {}
+paths:
+  '/user/{username}/profile':
+    parameters:
+      - $ref: '#/components/parameters/username'
+    get:
+      summary: User Profile
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples: {}
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      operationId: get-user-username-profile
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: library
+          allowEmptyValue: true
+          description: Queries user's movie library on presence.
+      description: Get user's profile.
+    put:
+      summary: ''
+      operationId: put-user-username-profile
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '422':
+          description: Unprocessable Entity (WebDAV)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                user_description:
+                  type: string
+  /user/me/profile/friends:
+    parameters: []
+    put:
+      summary: ''
+      operationId: put-user-me-profile-friend
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: username
+          description: friend's username
+    delete:
+      summary: ''
+      operationId: delete-user-me-profile-friends
+      responses:
+        '200':
+          description: OK
+      description: ''
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: username
+          description: friend's username
+  '/user/{username}/picture':
+    parameters:
+      - $ref: '#/components/parameters/username'
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            image/jpeg:
+              schema: {}
+            image/png:
+              schema:
+                type: string
+      operationId: get-user-username-picture
+      description: Get profile picture as image file.
+    post:
+      summary: ''
+      operationId: post-user-username-picture
+      responses:
+        '200':
+          description: OK
+      description: Set image file of user's profile.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                picture:
+                  type: string
+                  format: binary
+        description: 'Supported image formats: PNG'
+  '/user/{username}/library':
+    parameters:
+      - $ref: '#/components/parameters/username'
+    get:
+      summary: User Library
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LibraryEntry'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      operationId: get-user-username-library
+      parameters: []
+      description: Get user's media library.
+  '/user/{username}/library/entry/{tmdb-id}':
+    parameters:
+      - $ref: '#/components/parameters/username'
+      - $ref: '#/components/parameters/tmdb-id'
+    delete:
+      summary: Delete Library Entry
+      operationId: delete-user-username-library-entry
+      responses:
+        '200':
+          description: OK
+      description: Delete library entry.
+      parameters:
+        - $ref: '#/components/parameters/tmdb-type-tv'
+    put:
+      summary: Create or Update Library Entry
+      operationId: put-user-username-library-entry
+      description: Create/Update library entry.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LibraryEntryPut'
+            examples: {}
+      parameters:
+        - $ref: '#/components/parameters/tmdb-type-tv'
+      responses:
+        '200':
+          description: OK
+    get:
+      summary: ''
+      operationId: get-user-username-library-entry-tmdb-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LibraryEntry'
+      parameters:
+        - $ref: '#/components/parameters/tmdb-type-tv'
+      description: Get single library entry.
+  '/discussions/comment/medium/{tmdb-id}':
+    parameters:
+      - $ref: '#/components/parameters/tmdb-id'
+    get:
+      summary: ''
+      operationId: get-discussions-comment-medium-tmdb-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+      parameters:
+        - $ref: '#/components/parameters/tmdb-type-tv'
+    post:
+      summary: ''
+      operationId: post-discussions-comment-medium-tmdb-id
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectCreated'
+      parameters:
+        - $ref: '#/components/parameters/tmdb-type-tv'
+        - schema:
+            type: boolean
+            default: 'false'
+          in: query
+          name: is_review
+          description: Comment is review
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiscussionElement'
+  '/discussions/comment/user/{username}':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+      operationId: 'get-discussions-comment-user-:username'
+    parameters:
+      - $ref: '#/components/parameters/username'
+  /discussions/comment:
+    delete:
+      summary: ''
+      operationId: delete-discussions-comment
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: comment_id
+          description: ObjectID of comment to be deleted
+          required: true
+    get:
+      summary: ''
+      operationId: get-discussions-comment
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+      parameters:
+        - $ref: '#/components/parameters/comment-id'
+  /discussions/reply:
+    post:
+      summary: ''
+      operationId: post-discussions-reply
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - $ref: '#/components/parameters/comment-id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiscussionElement'
+    delete:
+      summary: ''
+      operationId: delete-discussions-reply
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      parameters:
+        - $ref: '#/components/parameters/reply-id'
+    get:
+      summary: ''
+      operationId: get-discussions-reply
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reply'
+      parameters:
+        - $ref: '#/components/parameters/reply-id'
+      x-internal: true
+  /find/users:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+      operationId: get-find
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: q
+          description: search string w.r.t. usernames
+    parameters: []
+security:
+  - auth0: []

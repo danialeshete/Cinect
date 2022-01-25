@@ -12,11 +12,9 @@ const checkJwt = jwt({
     }),
   
     // Validate the audience and the issuer
-    audience: 'https://cinect.eu.auth0.com/api/v2/', //replace with your API's audience, available at Dashboard > APIs
+    audience: process.env.SERVER_URL || 'http://localhost:5000',
     issuer: 'https://cinect.eu.auth0.com/',
     algorithms: [ 'RS256' ]
 });
 
-module.exports = {
-    checkJwt,
-};
+module.exports = checkJwt;

@@ -1,0 +1,14 @@
+.swiper-container {
+  max-width: calc(100vw - var(--bs-gutter-x) - var(--scrollbar-width));
+  width: 100%;
+  overflow: hidden;
+  height: var(--card-height);
+}
+
+@media only screen and (min-width : 768px) {
+  .swiper-container {
+    max-width: calc(100vw - var(--bs-gutter-x) - var(--scrollbar-width) - var(--side-nav-width));
+    width: 100%;
+    overflow: hidden;
+  }
+}

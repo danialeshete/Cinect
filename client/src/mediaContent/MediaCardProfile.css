@@ -1,0 +1,32 @@
+.media-card-profile .poster {
+  max-width: min(100%,200px);
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+  margin-bottom: 1em;
+  border-radius: 10px;
+}
+
+.x-to-plus {
+  transform: rotate(45deg);
+}
+
+.single-line-title {
+  text-overflow: ellipsis;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  color: white!important;
+}
+
+.comment-button-wrapper {
+  column-gap: 8px;
+}
+
+.rating-section {
+  column-gap: 10px;
+}
+.media-title {
+  color: white;
+}

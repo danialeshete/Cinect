@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Auth0Provider } from '@auth0/auth0-react';
-import {BrowserRouter} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import App from './App';
+import { HelmetProvider } from 'react-helmet-async';
 
 
 ReactDOM.render(
@@ -14,11 +16,13 @@ ReactDOM.render(
     clientId="AlX2KdLFtnGo3ldVUxXAzz6ltJkgK4S1"
     redirectUri={window.location.origin}
   >
-    <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-    </React.StrictMode>
+    <HelmetProvider>
+      <React.StrictMode>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </React.StrictMode>
+    </HelmetProvider>
   </Auth0Provider>,
   document.getElementById('root')
 );

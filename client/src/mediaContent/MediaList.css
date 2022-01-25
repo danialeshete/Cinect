@@ -1,0 +1,24 @@
+.content {
+  flex: 1 1;
+  flex-direction: column;
+}
+
+.media-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.media-list .content-card {
+  width: calc(0.5 * (100vw - var(--scrollbar-width) - var(--bs-gutter-x) - 10px));
+}
+
+@media only screen and (min-width : 540px) {
+  .media-list {
+    gap: 20px;
+  }
+  .media-list .content-card {
+    width: 200px;
+  }
+}

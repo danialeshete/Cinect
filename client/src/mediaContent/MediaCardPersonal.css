@@ -1,0 +1,16 @@
+.poster {
+  width: 80px;
+  height: 100px;
+}
+
+.x-to-plus {
+  transform: rotate(45deg);
+}
+
+.single-line-title {
+  text-overflow: ellipsis;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  color: white!important;
+}

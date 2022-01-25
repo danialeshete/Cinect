@@ -1,0 +1,13 @@
+.pagination.inactive {
+  color: #555;
+}
+.pagination {
+  font-size: 1.8em;
+  margin: 12px;
+  cursor: pointer;
+  color: #DDD;
+}
+
+.pagination:not(.inactive):hover {
+  color: white;
+}
